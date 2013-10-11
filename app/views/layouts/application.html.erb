@@ -8,15 +8,26 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
     <%= yield(:head) %>
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </nav>
-    </header>
+
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <%= render 'layouts/navigation' %>
+      </div>
+    </div>
+  </div>
+
+
+
     <div id="main" role="main">
       <div class="container">
         <div class="content">
@@ -27,6 +38,7 @@
             </div>
           </div>
           <footer>
+            <p>&copy; Company 2013</p>
           </footer>
         </div>
       </div> <!--! end of .container -->

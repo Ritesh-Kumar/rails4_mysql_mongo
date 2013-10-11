@@ -1,4 +1,11 @@
+
+<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
 <%= link_to "Bootstrap App", root_path, :class => 'brand' %>
+<div class="nav-collapse collapse">
 <ul class="nav">
   <% if user_signed_in? %>
     <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
@@ -13,6 +20,35 @@
   <% else %>
     <li><%= link_to 'Sign up', new_user_registration_path %></li>
   <% end %>
-  <li><%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %></li>
-  <li><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></li>
+  <!--<li><%#= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %></li>-->
+  <li><%#= controller_name %><%#= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></li>
+
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><a href="#">Action</a></li>
+      <li><a href="#">Another action</a></li>
+      <li><a href="#">Something else here</a></li>
+      <li class="divider"></li>
+      <li class="nav-header">Nav header</li>
+      <li><a href="#">Separated link</a></li>
+      <li><a href="#">One more separated link</a></li>
+    </ul>
+  </li>
 </ul>
+
+
+  <% unless user_signed_in? || (controller_name == 'sessions' && controller.action_name == 'new') %>
+
+  <%= simple_form_for @user, :url => session_path(@user), :html => {:class => 'navbar-form pull-right' } do |f| %>
+    <input class="span2" type="text" placeholder="Email" name="user[email]">
+    <input class="span2" type="password" placeholder="Password" name="user[password]">
+
+      <!--<input type="checkbox" name="user[remember_me]" />-->
+      <%#= f.input :remember_me, :as => :boolean, :wrapper => :inline_checkbox, :class=>"span2"  %>
+    <button type="submit" class="btn btn-success">Sign in</button>
+  <!--</form>-->
+  <% end %>
+  <% end %>
+
+</div><!--/.nav-collapse -->
