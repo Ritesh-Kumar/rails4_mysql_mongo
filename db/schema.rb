@@ -11,11 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131006074603) do
+ActiveRecord::Schema.define(version: 20131012140832) do
 
   create_table "movies", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "policies", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "company"
+    t.text     "address"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "status"
+    t.float    "amount"
+    t.float    "interest_rate"
+    t.string   "time_period"
+    t.string   "description_typetext"
+    t.text     "description_fulltext"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

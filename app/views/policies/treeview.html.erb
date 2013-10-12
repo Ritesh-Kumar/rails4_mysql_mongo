@@ -1,0 +1,21 @@
+<h2><%= t(:treeview, :default => 'Treeview') %> <%= t('app.models.policy.bs_caption', :default => 'policy') %></h2>
+
+<%
+namespace_for_url = ""
+plural_model_name = "policies"
+model_name        = "policy"
+opened_node       = Policy.select(:id).all.map{ |g| "'treeelt_" + g.id.to_s + "'" }.join(',').html_safe
+%>
+
+<div id="treeview" data-model="<%= model_name %>" data-url="/<%= namespace_for_url %><%= plural_model_name %>/" data-opened="[<%= opened_node %>]">
+  <ul>
+    <% Policy.transaction do %>
+    <% ar = Policy.where(:policy_id => nil) %>
+    <% ar = ar.order("position") if Policy.column_names.include?("position") %>
+      <% for g in ar.all %>
+        <%= build_treeview(g, 'policies') %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+

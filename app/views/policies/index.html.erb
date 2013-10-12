@@ -1,0 +1,215 @@
+<h2><%= t(:listing, :default => "Listing") %> <%= t('app.models.policy.bs_caption_plural', :default => 'policy') %></h2>
+
+<p>
+  <%= link_to '<i class="icon-plus"></i> '.html_safe + t(:new, :default => "New") + ' ' + t('app.models.policy.bs_caption', :default => 'policy'), new_policy_path, :class => "btn" %>
+  <% if Policy.columns.map(&:name).include?("policy_id") then %>
+    <%= link_to '<i class="icon-folder-close"></i> '.html_safe + t(:treeview, :default => "Treeview") + ' ' + t('app.models.policy.bs_caption', :default => 'policy'), treeview_policies_path, :class => "btn" %>
+  <% end %>
+</p>
+
+<%= render :partial => "layouts/mass_inserting", :locals => { :namespace => '', :model_name => 'policy', :model_columns => ['name','description','company','address','start_date','end_date','status','amount','interest_rate','time_period'] } %>
+
+<%# Set your scopes below (string in array) %>
+<% scopes = [] %>
+<% if not scopes.blank? then %>
+<div class="btn-toolbar">
+  <div class="btn-group">
+    <%= link_to "All (#{@policy_scope_for_scope.count})", policies_path(:scope => ""), :class => "btn #{((session[:scope][:policy].to_s == '') ? 'active' : '')}" %>
+    <% for scope in scopes %>
+    <%= link_to "#{scope} (#{@policy_scope_for_scope.send(scope).count})", policies_path(:scope => scope), :class => "btn #{((session[:scope][:policy].to_s == scope) ? 'active' : '')}" %>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<div class="row-fluid">
+  <div class="span9">
+    <%= form_tag  batch_policies_path, :class => "form-inline" do %>
+      <div class="well well-small">
+        <label class="control-label" for="select01"><%= t(:batch, :default => "Batch") %></label>
+
+        <select id="select01" name="actionprocess">
+          <option value="destroy"><%= t(:destroy, :default => "Destroy") %></option>
+          
+          <!-- Beautiful_scaffold - AddField - Batch - Do not remove -->
+        </select>
+        <button class="btn" type="submit"><i class="icon-ok"></i> <%= t(:process, :default => "Process") %></button>
+      </div>
+
+      <%= render :partial => "layouts/modal_columns", :locals => { :model_name => "policy", :model_columns => ['name','description','company','address','start_date','end_date','status','amount','interest_rate','time_period','created_at','updated_at'] } %>
+
+      <table class="table table-striped table-bordered table-condensed">
+        <thead>
+          <tr>
+            <th>
+              <a class="" data-toggle="modal" href="#modal-columns" title="<%= t(:select_columns, :default => "Select Columns") %>" ><i class="icon-th-list"></i></a>
+            </th>
+            <th>
+              <%= check_box_tag :checkall, '' %>
+            </th>
+            <th <%= visible_column("policy", "name") %> class="col-name">
+  <%= sorting_header("policy", "name", "") %>
+</th>
+<th <%= visible_column("policy", "description") %> class="col-description">
+  <%= sorting_header("policy", "description", "") %>
+</th>
+<th <%= visible_column("policy", "company") %> class="col-company">
+  <%= sorting_header("policy", "company", "") %>
+</th>
+<th <%= visible_column("policy", "address") %> class="col-address">
+  <%= sorting_header("policy", "address", "") %>
+</th>
+<th <%= visible_column("policy", "start_date") %> class="col-start_date">
+  <%= sorting_header("policy", "start_date", "") %>
+</th>
+<th <%= visible_column("policy", "end_date") %> class="col-end_date">
+  <%= sorting_header("policy", "end_date", "") %>
+</th>
+<th <%= visible_column("policy", "status") %> class="col-status">
+  <%= sorting_header("policy", "status", "") %>
+</th>
+<th <%= visible_column("policy", "amount") %> class="col-amount">
+  <%= sorting_header("policy", "amount", "") %>
+</th>
+<th <%= visible_column("policy", "interest_rate") %> class="col-interest_rate">
+  <%= sorting_header("policy", "interest_rate", "") %>
+</th>
+<th <%= visible_column("policy", "time_period") %> class="col-time_period">
+  <%= sorting_header("policy", "time_period", "") %>
+</th>
+
+            <!-- Beautiful_scaffold - AddField - Header - Do not remove -->
+            <th <%= visible_column("policy", "created_at") %> class="col-created_at">
+              <%= sorting_header("policy", "created_at", "") %>
+            </th>
+            <th <%= visible_column("policy", "updated_at") %> class="col-updated_at">
+              <%= sorting_header("policy", "updated_at", "") %>
+            </th>
+            <th colspan="3">
+              <label class="checkbox">
+                <%= check_box_tag :checkallelt, 'all' %>
+                <%= pluralize(@policy_scope.count, "policy") %>
+              </label>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @policies.each do |policy| %>
+          <tr class="line-<%= cycle("1","2") %>">
+            <td><%= policy.id %></td>
+            <td><%= check_box_tag "ids[]",policy.id, false, :class => 'cbbatch' %></td>
+              <td <%= visible_column("policy", "name") %> class="col-name <%= align_attribute("string") %>">
+      <%= policy.name %>
+  </td>
+  <td <%= visible_column("policy", "description") %> class="col-description <%= align_attribute("richtext") %>">
+      <%= truncate(policy.description_fulltext, :length => 30) %>
+  </td>
+  <td <%= visible_column("policy", "company") %> class="col-company <%= align_attribute("string") %>">
+      <%= policy.company %>
+  </td>
+  <td <%= visible_column("policy", "address") %> class="col-address <%= align_attribute("text") %>">
+      <%= policy.address %>
+  </td>
+  <td <%= visible_column("policy", "start_date") %> class="col-start_date <%= align_attribute("date") %>">
+      <%= policy.start_date %>
+  </td>
+  <td <%= visible_column("policy", "end_date") %> class="col-end_date <%= align_attribute("date") %>">
+      <%= policy.end_date %>
+  </td>
+  <td <%= visible_column("policy", "status") %> class="col-status <%= align_attribute("string") %>">
+      <%= policy.status %>
+  </td>
+  <td <%= visible_column("policy", "amount") %> class="col-amount <%= align_attribute("float") %>">
+      <%= policy.amount %>
+  </td>
+  <td <%= visible_column("policy", "interest_rate") %> class="col-interest_rate <%= align_attribute("float") %>">
+      <%= policy.interest_rate %>
+  </td>
+  <td <%= visible_column("policy", "time_period") %> class="col-time_period <%= align_attribute("string") %>">
+      <%= policy.time_period %>
+  </td>
+<!-- Beautiful_scaffold - AddField - Column - Do not remove -->
+            <td <%= visible_column("policy", "created_at") %> class="col-created_at <%= align_attribute("datetime") %>">
+              <%= l(policy.created_at, :format => :long) %>
+            </td>
+            <td <%= visible_column("policy", "updated_at") %> class="col-updated_at <%= align_attribute("datetime") %>">
+              <%= l(policy.updated_at, :format => :long) %>
+            </td>
+            <td><%= link_to '<i class="icon-search"></i>'.html_safe, policy_path(policy), :title => t(:show, :default => "Show") %></td>
+            <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_policy_path(policy), :title => t(:edit, :default => "Edit") %></td>
+            <td><%= link_to '<i class="icon-remove"></i>'.html_safe, policy_path(policy), :data => { :confirm => t(:are_you_sure, :default => "Are you sure?") }, :method => :delete, :title => t(:destroy, :default => "Destroy") %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <% clean_params %>
+          <%= will_paginate @policies,
+                  :inner_window => 0,
+                  :outer_window => 0,
+                  :previous_label => t(:prev, :default => "Previous"),
+                  :next_label => t(:next, :default => "Next") %>
+
+        </div>
+        <div class="btn-group pull-right">
+          <%= link_to '<i class="icon-download"></i> CSV'.html_safe,  policies_path(:format => :csv), :class => "btn" %>
+          <%= link_to '<i class="icon-download"></i> XML'.html_safe,  policies_path(:format => :xml), :class => "btn" %>
+          <%= link_to '<i class="icon-download"></i> JSON'.html_safe, policies_path(:format => :json), :class => "btn" %>
+          <%= link_to '<i class="icon-download"></i> PDF'.html_safe,  policies_path(:format => :pdf), :class => "btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="span3">
+    <%= search_form_for @q, :url => search_policies_path, :html => { :class => "well well-small" }, :method => :post do |f| %>
+        <%= ransack_field("policy", "name", f, "Name") %>
+  <%= ransack_field("policy", "description_fulltext", f, "Description") %>
+  <%= ransack_field("policy", "company", f, "Company") %>
+  <%= ransack_field("policy", "address", f, "Address") %>
+  <%= ransack_field("policy", "start_date", f, "Start_date (dd/mm/yyyy)") %>
+  <%= ransack_field("policy", "end_date", f, "End_date (dd/mm/yyyy)") %>
+  <%= ransack_field("policy", "status", f, "Status") %>
+  <%= ransack_field("policy", "amount", f, "Amount") %>
+  <%= ransack_field("policy", "interest_rate", f, "Interest_rate") %>
+  <%= ransack_field("policy", "time_period", f, "Time_period") %>
+
+        <%= ransack_field("policy", "created_at", f, "Created At (dd/mm/yyyy)") %>
+  <%= ransack_field("policy", "updated_at", f, "Updated At (dd/mm/yyyy)") %>
+  <%= ransack_field("policy", "id", f, "Id") %>
+
+      <!-- Beautiful_scaffold - AddField - Search - Do not remove -->
+      <%= f.submit t(:filter, :default => "Filter"), :class => "btn btn-primary" %>
+      <%= link_to  t(:cancel, :default => "Cancel"), policies_path(:nosearch => "ok"), :class => "btn" %>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+    $('#filter-columns').on('click', function(){
+        var return_json = [];
+        $.each($('input[name^="field"]:checked'), function(index, value) {
+            return_json.push($(value).val());
+        });
+        $.ajax({
+            url: '/policy/select_fields',
+            data: { 'fields' : return_json },
+            success: function(data) {
+                $('table.table th[class^="col"], table.table td[class^="col"]').css('display', 'none');
+                $.each(return_json, function(index, value) {
+                    $('table.table th.col-' + value + ', table.table td.col-' + value).css('display', 'table-cell');
+                });
+                $('#modal-columns').modal('hide');
+            }
+        });
+        return false;
+    });
+    $('#cancel-filter-columns').on('click', function(){
+        $('#modal-columns').modal('hide');
+        return false;
+    });
+</script>

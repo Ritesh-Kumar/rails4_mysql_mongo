@@ -1,0 +1,36 @@
+<% formparams = [] %>
+<% if not namespace.blank? then %>
+  <% formparams << namespace %>
+<% end %>
+<% formparams << model_name.camelize.constantize.new %>
+<%= form_for formparams, :method => :post, :html => { :class => "well well-small form-horizontal mass-inserting #{(params[:mass_inserting] ? 'setfocus' : '')}" } do |f| %>
+  <%= hidden_field_tag :mass_inserting, true %>
+  <% for col in model_columns %>
+    <div <%= visible_column(model_name, col, 'inline') %> class="col-<%= col %>">
+      <%=
+        ar = model_name.camelize.constantize.columns_hash[col]
+        if not ar.nil? then
+          case ar.type
+          when :integer then
+            if col =~ /.*_id/ then
+              f.collection_select((col).to_sym, col.camelize.constantize.all, :id, :caption, { :include_blank => true, :selected => (begin params[:q][col + "_eq"].to_i rescue '' end) }, { :class => "input-small" })
+            else
+              f.text_field(col.to_sym, :class => "input-small", :placeholder => col.capitalize)
+            end
+          when :boolean then
+            (
+            "<label class='bs-label-ib'>#{f.check_box(col.to_sym, {}, true, false)}#{col.capitalize}</label>".html_safe
+            )
+          else
+            f.text_field(col.to_sym, :class => "input-small", :placeholder => col.capitalize)
+          end
+        else
+          f.collection_select((col + '_id').to_sym, col.camelize.constantize.all, :id, :caption, { :include_blank => true, :selected => (begin params[:q][col + "_id_eq"].to_i rescue '' end) }, { :class => "input-small" })
+        end
+      %>
+    </div>
+  <% end %>
+  <div style="display:inline;">
+    <%= f.submit t(:create, :default => "Create"), :class => "btn" %>
+  </div>
+<% end %>

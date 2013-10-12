@@ -1,6 +1,20 @@
 Rails4MysqlMongo::Application.routes.draw do
   
   
+  match "policies/search_and_filter" => "policies#index", :via => [:get, :post], :as => :search_policies
+  resources :policies do
+    collection do
+      post :batch
+      get  :treeview
+    end
+    member do
+      post :treeview_update
+    end
+  end
+
+#  root :to => 'beautiful#dashboard'
+  match ':model_sym/select_fields' => 'beautiful#select_fields', :via => [:get, :post]
+
   resources :movies
 
   authenticated :user do

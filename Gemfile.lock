@@ -5,6 +5,16 @@ GIT
     hashugar (0.0.6)
 
 GIT
+  remote: git://github.com/ernie/ransack.git
+  revision: 6b20d053abc8bd8a732ff3f66e6c4e20e9e8fab8
+  branch: rails-4
+  specs:
+    ransack (0.7.3)
+      actionpack (>= 4.0.0)
+      activerecord (>= 4.0.0)
+      polyamorous (~> 0.6.0)
+
+GIT
   remote: git://github.com/mongoid/mongoid.git
   revision: 348a0304e0310ba3ab87508f126cb91548bc9df8
   specs:
@@ -25,6 +35,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.2)
+    RedCloth (4.2.9)
     actionmailer (4.0.0)
       actionpack (= 4.0.0)
       mail (~> 2.5.3)
@@ -49,9 +61,13 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    afm (0.2.0)
     arel (4.0.0)
     atomic (1.1.14)
+    bb-ruby (1.0.2)
     bcrypt-ruby (3.1.2)
+    beautiful_scaffold (0.3.2)
+    bluecloth (2.2.0)
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     bson (2.0.0.rc2)
@@ -59,6 +75,9 @@ GEM
     cancan (1.6.10)
     celluloid (0.15.1)
       timers (~> 1.1.0)
+    chardinjs-rails (0.1.2)
+      sass-rails (>= 3.2)
+      thor (~> 0.14)
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -100,6 +119,7 @@ GEM
     guard-rspec (3.1.0)
       guard (>= 1.8)
       rspec (~> 2.13)
+    hashery (2.1.1)
     hashie (2.0.5)
     hike (1.2.3)
     httpauth (0.2.0)
@@ -107,7 +127,7 @@ GEM
     jbuilder (1.5.1)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
-    jquery-rails (3.0.4)
+    jquery-rails (2.3.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     jwt (0.1.8)
@@ -123,6 +143,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25)
+    mini_portile (0.5.1)
     minitest (4.7.5)
     mongoid-rspec (1.9.0)
       mongoid (>= 3.0.1)
@@ -134,6 +155,8 @@ GEM
     multi_json (1.8.1)
     multipart-post (1.2.0)
     mysql2 (0.3.13)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
@@ -158,7 +181,20 @@ GEM
     optionable (0.1.1)
     origin (1.1.0)
     orm_adapter (0.4.0)
+    pdf-reader (1.3.3)
+      Ascii85 (~> 1.0.0)
+      afm (~> 0.2.0)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
+    polyamorous (0.6.4)
+      activerecord (>= 3.0)
     polyglot (0.3.3)
+    prawn (1.0.0.rc2)
+      afm
+      pdf-reader (>= 0.9.0, < 2.0)
+      ruby-rc4
+      ttfunk (~> 1.0.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -185,6 +221,7 @@ GEM
     rb-fsevent (0.9.3)
     rb-inotify (0.9.2)
       ffi (>= 0.5.0)
+    rdiscount (2.1.6)
     ref (1.0.5)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -201,6 +238,9 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    ruby-rc4 (0.1.5)
+    sanitize (2.0.6)
+      nokogiri (>= 1.4.4)
     sass (3.2.12)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -235,14 +275,21 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.0.3)
     turbolinks (1.3.0)
       coffee-rails
+    twitter-bootstrap-rails (2.2.8)
+      actionpack (>= 3.1)
+      execjs
+      rails (>= 3.1)
+      railties (>= 3.1)
     tzinfo (0.3.37)
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.3)
       rack (>= 1.0)
+    will_paginate (3.0.5)
     zeus (0.13.3)
       method_source (>= 0.6.7)
 
@@ -250,8 +297,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  RedCloth
+  bb-ruby
+  beautiful_scaffold (~> 0.3)
+  bluecloth
   bootstrap-sass (~> 2.3.2.1)
   cancan
+  chardinjs-rails
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise (~> 3.0.0)
@@ -261,23 +313,29 @@ DEPENDENCIES
   guard-rspec
   hashugar!
   jbuilder (~> 1.2)
-  jquery-rails
+  jquery-rails (< 3.0.0)
   mongoid!
   mongoid-rspec
   mysql2
   omniauth
   omniauth-facebook
   omniauth-twitter
+  prawn (= 1.0.0.rc2)
   pry
   quiet_assets
   rails (= 4.0.0)
+  ransack!
   rb-inotify (~> 0.9)
+  rdiscount
   rspec-rails
+  sanitize
   sass-rails (~> 4.0.0)
   simple_form!
   simplecov
   therubyracer
   thin
   turbolinks
+  twitter-bootstrap-rails
   uglifier (>= 1.3.0)
+  will_paginate
   zeus

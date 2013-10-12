@@ -1,0 +1,146 @@
+
+<%= form_for(@policy, :html => { :class => "form-horizontal" }) do |f| %>
+  <% if @policy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@policy.errors.count, "error") %> prohibited this policy from being saved:</h2>
+
+      <ul>
+        <% @policy.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %>
+      </ul>
+    </div>
+  <% end %>
+      <div class="control-group">
+      <%= f.label :name, t('app.models.policy.bs_attributes.name', :default => 'name').capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :description, t('app.models.policy.bs_attributes.description', :default => 'description').capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_area :description, :class => "richtext-editor" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inlineCheckboxes"></label>
+      <div class="controls">
+        
+          <% hashradio = {:id => "description-bbcode", :class => "select-richtext", 'data-editor' => 'markItUpPolicy_description', 'data-spleditor' => 'policy_description' } %>
+          <% hashradio[:checked] = "checked" if @policy.description_typetext == "bbcode" %>
+          <label for="description-bbcode" class="label-richtext-type checkbox inline">
+            <%= f.radio_button :description_typetext, "bbcode", hashradio  %>
+            Bbcode
+          </label>
+        
+          <% hashradio = {:id => "description-html", :class => "select-richtext", 'data-editor' => 'markItUpPolicy_description', 'data-spleditor' => 'policy_description' } %>
+          <% hashradio[:checked] = "checked" if @policy.description_typetext == "html" %>
+          <label for="description-html" class="label-richtext-type checkbox inline">
+            <%= f.radio_button :description_typetext, "html", hashradio  %>
+            Html
+          </label>
+        
+          <% hashradio = {:id => "description-text", :class => "select-richtext", 'data-editor' => 'markItUpPolicy_description', 'data-spleditor' => 'policy_description' } %>
+          <% hashradio[:checked] = "checked" if @policy.description_typetext == "text" %>
+          <label for="description-text" class="label-richtext-type checkbox inline">
+            <%= f.radio_button :description_typetext, "text", hashradio  %>
+            Text
+          </label>
+        
+          <% hashradio = {:id => "description-wiki", :class => "select-richtext", 'data-editor' => 'markItUpPolicy_description', 'data-spleditor' => 'policy_description' } %>
+          <% hashradio[:checked] = "checked" if @policy.description_typetext == "wiki" %>
+          <label for="description-wiki" class="label-richtext-type checkbox inline">
+            <%= f.radio_button :description_typetext, "wiki", hashradio  %>
+            Wiki
+          </label>
+        
+          <% hashradio = {:id => "description-textile", :class => "select-richtext", 'data-editor' => 'markItUpPolicy_description', 'data-spleditor' => 'policy_description' } %>
+          <% hashradio[:checked] = "checked" if @policy.description_typetext == "textile" %>
+          <label for="description-textile" class="label-richtext-type checkbox inline">
+            <%= f.radio_button :description_typetext, "textile", hashradio  %>
+            Textile
+          </label>
+        
+          <% hashradio = {:id => "description-markdown", :class => "select-richtext", 'data-editor' => 'markItUpPolicy_description', 'data-spleditor' => 'policy_description' } %>
+          <% hashradio[:checked] = "checked" if @policy.description_typetext == "markdown" %>
+          <label for="description-markdown" class="label-richtext-type checkbox inline">
+            <%= f.radio_button :description_typetext, "markdown", hashradio  %>
+            Markdown
+          </label>
+        
+      </div>
+    </div>
+
+    <% rttype = @policy.description_typetext.to_s %>
+    <% if not rttype.blank? then %>
+    <script language="javascript">
+      $(document).ready(function(){
+        $('#policy_description').markItUp(my<%= rttype.capitalize %>Settings);
+        $('#markItUpPolicy_description').addClass('<%= rttype.downcase %>');
+      });
+    </script>
+    <% end %>
+    <div class="control-group">
+      <%= f.label :company, t('app.models.policy.bs_attributes.company', :default => 'company').capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :company %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :address, t('app.models.policy.bs_attributes.address', :default => 'address').capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_area :address, :rows => 5 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :start_date, t('app.models.policy.bs_attributes.start_date', :default => 'start_date').capitalize, :class => "control-label" %>
+      <div class="controls">
+        <div class="input-append">
+          <!--<input type="hidden" name="policy[start_date(3i)]" id="policy_start_date_3i" value="<%= begin @policy.start_date.day rescue "" end %>" />-->
+          <!--<input type="hidden" name="policy[start_date(2i)]" id="policy_start_date_2i" value="<%= begin @policy.start_date.mon rescue "" end %>" />-->
+          <!--<input type="hidden" name="policy[start_date(1i)]" id="policy_start_date_1i" value="<%= begin @policy.start_date.year rescue "" end %>" />-->
+          <%= f.text_field :start_date %><span class="add-on"><i class="icon-calendar"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :end_date, t('app.models.policy.bs_attributes.end_date', :default => 'end_date').capitalize, :class => "control-label" %>
+      <div class="controls">
+        <div class="input-append">
+          <!--<input type="hidden" name="policy[end_date(3i)]" id="policy_end_date_3i" value="<%= begin @policy.end_date.day rescue "" end %>" />-->
+          <!--<input type="hidden" name="policy[end_date(2i)]" id="policy_end_date_2i" value="<%= begin @policy.end_date.mon rescue "" end %>" />-->
+          <!--<input type="hidden" name="policy[end_date(1i)]" id="policy_end_date_1i" value="<%= begin @policy.end_date.year rescue "" end %>" />-->
+          <%= f.text_field :end_date %><span class="add-on"><i class="icon-calendar"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :status, t('app.models.policy.bs_attributes.status', :default => 'status').capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :status %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :amount, t('app.models.policy.bs_attributes.amount', :default => 'amount').capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :amount %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :interest_rate, t('app.models.policy.bs_attributes.interest_rate', :default => 'interest_rate').capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :interest_rate %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :time_period, t('app.models.policy.bs_attributes.time_period', :default => 'time_period').capitalize, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :time_period %>
+      </div>
+    </div>
+<!-- Beautiful_scaffold - AddField - Do not remove -->
+  <div class="form-actions">
+    <%= f.submit :class => "btn btn-primary" %>
+  </div>
+<% end %>
+
+

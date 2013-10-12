@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="<%= (I18n.locale || I18n.default_locale) %>">
+  <head>
+    <meta charset="utf-8">
+    <title>Beautiful Scaffold</title>
+
+    <meta name="description" content="Beautiful Scaffold">
+    <meta name="author" content="You or me Sylvain Claudel (http://blog.escarworld.com)">
+
+    <%= stylesheet_link_tag "application-bs" %>
+    <%= javascript_include_tag "application-bs" %>
+
+    <%= csrf_meta_tags %>
+    <%= yield :head %>
+  </head>
+  <body style="display:block;">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">
+            Beautiful-Scaffold
+          </a>
+          <ul class="nav">
+            <li class="active">
+              <a href="/">Home</a>
+            </li>
+            <li class="hidden-desktop">
+              <!-- Mobile navbar -->
+              <a href="#" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-th-list"></i>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav pull-right">
+            <li>
+              <!-- Beautiful_scaffold - Signin - Do not remove -->
+            </li>
+          </ul>
+          <div class="nav-collapse collapse">
+            <ul class="nav hidden-desktop">
+              <%= render :partial => "layouts/beautiful_menu" %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <ul class="nav nav-list well">
+            <li class="nav-header">
+              Menu
+            </li>
+            <%= render :partial => "layouts/beautiful_menu" %>
+          </ul>
+        </div>
+        <div class="span10">
+          <% if not flash[:notice].blank? then %>
+            <div class="alert alert-info">
+              <a class="close" data-dismiss="alert" href="#">×</a>
+              <h4 class="alert-heading">Info : </h4>
+              <%= flash[:notice] %>
+            </div>
+          <% end %>
+          <% if not flash[:error].blank? then %>
+            <div class="alert alert-error">
+              <a class="close" data-dismiss="alert" href="#">×</a>
+              <h4 class="alert-heading">Error : </h4>
+              <%= flash[:error] %>
+            </div>
+          <% end %>
+          <div>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loader" style="display:none">
+      <div class="circle"></div>
+      <div class="circle1"></div>
+    </div>
+
+    <!-- Beautiful_scaffold - Modal - Do not remove -->
+
+    <script type="text/javascript">
+      <% if not @opened_modal.blank? then %>
+      $('<%= @opened_modal %>').modal('show');
+      <% end %>
+    </script>
+    <!--&lt;!&ndash;<script type="text/javascript">&ndash;&gt;-->
+<!--//        ;(function($){-->
+<!--//            $.fn.datepicker.dates['<%#= I18n.locale.to_s %>'] = {-->
+<!--//                days:        <%#= (t("date.day_names") + [t("date.day_names").first]).map(&:capitalize).to_s.html_safe %>,-->
+<!--//                daysShort:   <%#= (t("date.abbr_day_names") + [t("date.abbr_day_names").first]).map(&:capitalize).to_s.html_safe %>,-->
+<!--//                daysMin:     <%#= (t("date.abbr_day_names") + [t("date.abbr_day_names").first]).map{ |d| d.capitalize[0..2] }.to_s.html_safe %>,-->
+<!--//                months:      <%#= t("date.month_names")[1..12].map(&:capitalize).to_s.html_safe %>,-->
+             <!--   monthsShort: <%#= t("date.abbr_month_names")[1..12].map(&:capitalize).to_s.html_safe %>
+<!--//            };-->
+<!--//        }(jQuery));-->
+    <!--&lt;!&ndash;</script>&ndash;&gt;-->
+
+  </body>
+</html>

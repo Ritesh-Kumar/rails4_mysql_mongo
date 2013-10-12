@@ -1,0 +1,48 @@
+<h2><%= t(:show, :default => "Show") %> <%= t('app.models.policy.bs_caption', :default => 'policy') %></h2>
+
+  <p>
+    <b><%= t('app.models.policy.bs_attributes.name', :default => 'name') %>:</b>
+      <%= @policy.name %>
+  </p>
+  <p>
+    <b><%= t('app.models.policy.bs_attributes.description', :default => 'description') %>:</b>
+      <%= @policy.description %>
+  </p>
+  <p>
+    <b><%= t('app.models.policy.bs_attributes.company', :default => 'company') %>:</b>
+      <%= @policy.company %>
+  </p>
+  <p>
+    <b><%= t('app.models.policy.bs_attributes.address', :default => 'address') %>:</b>
+      <%= @policy.address %>
+  </p>
+  <p>
+    <b><%= t('app.models.policy.bs_attributes.start_date', :default => 'start_date') %>:</b>
+      <%= @policy.start_date %>
+  </p>
+  <p>
+    <b><%= t('app.models.policy.bs_attributes.end_date', :default => 'end_date') %>:</b>
+      <%= @policy.end_date %>
+  </p>
+  <p>
+    <b><%= t('app.models.policy.bs_attributes.status', :default => 'status') %>:</b>
+      <%= @policy.status %>
+  </p>
+  <p>
+    <b><%= t('app.models.policy.bs_attributes.amount', :default => 'amount') %>:</b>
+      <%= @policy.amount %>
+  </p>
+  <p>
+    <b><%= t('app.models.policy.bs_attributes.interest_rate', :default => 'interest_rate') %>:</b>
+      <%= @policy.interest_rate %>
+  </p>
+  <p>
+    <b><%= t('app.models.policy.bs_attributes.time_period', :default => 'time_period') %>:</b>
+      <%= @policy.time_period %>
+  </p>
+
+<!-- Beautiful_scaffold - AddField - Field - Do not remove -->
+
+<%= link_to t(:edit, :default => "Edit"), edit_policy_path(@policy), :class => "btn" %>
+<%= link_to t(:back, :default => "Back"), policies_path, :class => "btn" %>
+

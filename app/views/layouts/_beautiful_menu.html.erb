@@ -1,0 +1,4 @@
+<!-- Beautiful Scaffold Menu Do Not Touch This -->
+      <li class="<%= "active" if params[:controller] == "policies" %>">
+        <%= link_to t('app.models.policy.bs_caption_plural', :default => 'policy').capitalize, policies_path %>
+      </li>
