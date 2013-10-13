@@ -1,5 +1,4 @@
-
-<%= form_for(@policy, :html => { :class => "form-horizontal" }) do |f| %>
+<%= simple_form_for(@policy, :html => { :class => "form-horizontal" }) do |f| %>
   <% if @policy.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@policy.errors.count, "error") %> prohibited this policy from being saved:</h2>
@@ -95,9 +94,6 @@
       <%= f.label :start_date, t('app.models.policy.bs_attributes.start_date', :default => 'start_date').capitalize, :class => "control-label" %>
       <div class="controls">
         <div class="input-append">
-          <!--<input type="hidden" name="policy[start_date(3i)]" id="policy_start_date_3i" value="<%= begin @policy.start_date.day rescue "" end %>" />-->
-          <!--<input type="hidden" name="policy[start_date(2i)]" id="policy_start_date_2i" value="<%= begin @policy.start_date.mon rescue "" end %>" />-->
-          <!--<input type="hidden" name="policy[start_date(1i)]" id="policy_start_date_1i" value="<%= begin @policy.start_date.year rescue "" end %>" />-->
           <%= f.text_field :start_date %><span class="add-on"><i class="icon-calendar"></i></span>
         </div>
       </div>
@@ -106,9 +102,6 @@
       <%= f.label :end_date, t('app.models.policy.bs_attributes.end_date', :default => 'end_date').capitalize, :class => "control-label" %>
       <div class="controls">
         <div class="input-append">
-          <!--<input type="hidden" name="policy[end_date(3i)]" id="policy_end_date_3i" value="<%= begin @policy.end_date.day rescue "" end %>" />-->
-          <!--<input type="hidden" name="policy[end_date(2i)]" id="policy_end_date_2i" value="<%= begin @policy.end_date.mon rescue "" end %>" />-->
-          <!--<input type="hidden" name="policy[end_date(1i)]" id="policy_end_date_1i" value="<%= begin @policy.end_date.year rescue "" end %>" />-->
           <%= f.text_field :end_date %><span class="add-on"><i class="icon-calendar"></i></span>
         </div>
       </div>

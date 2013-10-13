@@ -1,14 +1,17 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
 
 <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
   <span class="icon-bar"></span>
   <span class="icon-bar"></span>
   <span class="icon-bar"></span>
 </button>
-<%= link_to "Bootstrap App", root_path, :class => 'brand' %>
+<%= link_to APPLICATION_NAME, root_path, :class => 'brand' %>
 <div class="nav-collapse collapse">
 <ul class="nav nav-pills">
   <% if user_signed_in? %>
-      <li><%#= link_to 'Policy', policies_path %></li>
+      <li><%= link_to 'Policy', policies_path %></li>
     <li><%= link_to 'Edit account', edit_user_registration_path %></li>
     <% if current_user.has_role? :admin %>
       <li><%= link_to 'Admin', users_path %></li>
@@ -55,3 +58,6 @@
   <% end %>
 
 </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>

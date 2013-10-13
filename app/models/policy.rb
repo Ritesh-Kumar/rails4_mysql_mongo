@@ -12,6 +12,8 @@ class Policy < ActiveRecord::Base
   include BeautifulScaffoldModule
   before_save :fulltext_field_processing
 
+  validates_presence_of :name
+
   # You can OVERRIDE this method used in model form and search form (in belongs_to relation)
   def caption
     (self["name"] || self["label"] || self["description"] || "##{id}")
