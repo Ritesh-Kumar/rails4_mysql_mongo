@@ -13,21 +13,21 @@
   <%= csrf_meta_tags %>
   <%= yield :head %>
 </head>
-<body class="<%= controller_name %> <%= action_name %>">
+<body class="<%= controller_name %> <%= action_name %>" style="background: none repeat scroll 0 0 rgb(200,200,200);">
 
 <%= render 'layouts/navigation' %>
 
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span2">
-      <ul class="nav nav-list well">
-        <li class="nav-header">
-          Menu
-        </li>
-        <%= render :partial => "layouts/beautiful_menu" %>
-      </ul>
-    </div>
-    <div class="span10">
+    <!--<div class="span2">-->
+      <!--<ul class="nav nav-list well">-->
+        <!--<li class="nav-header">-->
+          <!--Menu-->
+        <!--</li>-->
+        <!--<%#= render :partial => "layouts/beautiful_menu" %>-->
+      <!--</ul>-->
+    <!--</div>-->
+    <div class="span12">
       <% if not flash[:notice].blank? then %>
           <div class="alert alert-info">
             <a class="close" data-dismiss="alert" href="#">×</a>
@@ -43,7 +43,7 @@
           </div>
       <% end %>
       <!--<div style="background:none repeat scroll 0% 0% rgb(11, 42, 73);padding: 10px;color: white;">-->
-        <div>
+      <div style="background:none repeat scroll 0 0 rgb(255,255,255);padding: 10px;">
           <%= yield %>
       </div>
     </div>

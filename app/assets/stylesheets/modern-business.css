@@ -34,7 +34,7 @@ body {
 }
 
 .section-colored {
-  background:none repeat scroll 0% 0% rgb(51, 102, 153); /* change this to change the background color of a colored section */
+  background:none repeat scroll 0% 0% rgb(157, 157, 157); /* change this to change the background color of a colored section */
   background-image: linear-gradient(to bottom, transparent 0px, rgba(0, 0, 0, 0.5) 100%);
   color: rgb(255, 255, 255);
 

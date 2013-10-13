@@ -1,6 +1,6 @@
 # encoding : utf-8
 class PoliciesController < BeautifulController
-
+  before_filter :authenticate_user!
   before_filter :load_policy, :only => [:show, :edit, :update, :destroy]
 
   # Uncomment for check abilities with CanCan
