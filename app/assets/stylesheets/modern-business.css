@@ -27,6 +27,12 @@ body {
 }
 
 
+/* My stylesheet*/
+/*.nav-colored {*/
+    /*height: 50px;*/
+/*}*/
+
+
 /* Page Sections */
 .section,
 .section-colored {
@@ -34,9 +40,11 @@ body {
 }
 
 .section-colored {
-  background:none repeat scroll 0% 0% rgb(157, 157, 157); /* change this to change the background color of a colored section */
-  background-image: linear-gradient(to bottom, transparent 0px, rgba(0, 0, 0, 0.5) 100%);
+  /*background:none repeat scroll 0% 0% rgb(157, 157, 157); *//* change this to change the background color of a colored section */
+  /*background-image: linear-gradient(to top, rgb(0, 115, 0), rgb(10, 255, 10));*/
+    background-image: linear-gradient(to top, rgb(25, 72, 78), rgb(25, 72, 218));
   color: rgb(255, 255, 255);
+
 
 }
 

@@ -20,4 +20,34 @@
     /*background-image: linear-gradient(to right, transparent 0px, rgba(0, 0, 0, 0.5) 100%);*/
 }
 
+.navbar-inverse .nav > li > a:focus, .navbar-inverse .nav > li > a {
+    color:white;
+}
 
+/*Yet stop implement toggle feOffset more*/
+/*.navbar-inverse .nav li.dropdown.open > .dropdown-toggle .caret {*/
+    /*background-color: rgb(245, 245, 245);*/
+/*}*/
+
+.navbar-inverse .nav > li > a:focus, .navbar-inverse .nav > li > a:hover {
+transition: background-position 0.1s linear 0s;
+/*text-transform: uppercase;*/
+    background-color: rgb(245, 245, 245);
+    color: rgb(85, 85, 85);
+    /*background-image: linear-gradient(to bottom, rgb(0, 136, 204), rgb(0, 68, 204));*/
+    background-image: linear-gradient(to bottom, rgb(245, 245, 245), rgb(245, 245, 245));
+
+}
+
+
+.navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus {
+    background-color: rgb(245, 245, 245);
+    color: rgb(85, 85, 85);
+}
+
+.navbar-inverse .navbar-inner {
+    background: none repeat scroll 0 0 rgb(25, 72, 118);
+}
+.navbar-inverse .navbar-inner .brand {
+    color:white;
+}

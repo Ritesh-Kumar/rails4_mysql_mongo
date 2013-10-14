@@ -93,14 +93,14 @@ class PoliciesController < BeautifulController
           if params[:mass_inserting] then
             redirect_to policies_path(:mass_inserting => true)
           else
-            redirect_to policy_path(@policy), :flash => { :notice => t(:create_success, :model => "policy") }
+            redirect_to policy_path(@policy), :flash => { :notice => t(:create_success, :model => "Policy") }
           end
         }
         format.json { render :json => @policy, :status => :created, :location => @policy }
       else
         format.html {
           if params[:mass_inserting] then
-            redirect_to policies_path(:mass_inserting => true), :flash => { :error => t(:error, "Error") }
+            redirect_to policies_path(:mass_inserting => true), :flash => { :error => @policy.errors.messages }
           else
             render :action => "new"
           end
@@ -114,7 +114,7 @@ class PoliciesController < BeautifulController
 
     respond_to do |format|
       if @policy.update_attributes(params_for_model)
-        format.html { redirect_to policy_path(@policy), :flash => { :notice => t(:update_success, :model => "policy") }}
+        format.html { redirect_to policy_path(@policy), :flash => { :notice => t(:update_success, :model => "Policy") }}
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
